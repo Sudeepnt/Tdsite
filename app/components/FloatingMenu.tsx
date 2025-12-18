@@ -64,6 +64,10 @@ export default function FloatingMenu({ setActivePage }: { setActivePage: (page: 
               Hide
             </button>
             
+
+
+
+
             {/* Side Menu Links */}
             <div className="flex flex-col gap-2 flex-grow overflow-y-auto">
                 {/* 1. Home */}
@@ -88,22 +92,39 @@ export default function FloatingMenu({ setActivePage }: { setActivePage: (page: 
             </div>
           </div>
 
+
+
+
+
+
+
           {/* COLUMN 2: WELCOME (Home) */}
-          <div 
-            onClick={() => handleNav("home")} 
-            className="w-[65vw] md:w-[18vw] flex-shrink-0 bg-[#808080] h-full rounded-3xl p-6 flex flex-col justify-between hover:bg-black transition-colors cursor-pointer border border-white/10 menu-card group"
-          >
+      <div 
+  onClick={() => handleNav("home")} 
+  className="w-[65vw] md:w-[18vw] flex-shrink-0 bg-[#808080] min-h-[400px] max-h-[500px] rounded-3xl p-6 flex flex-col justify-between hover:bg-black transition-colors cursor-pointer border border-white/10 menu-card group"
+>
+
+
              <h3 className="text-2xl font-bold text-white">Welcome to Crodal &rarr;</h3>
              <div>
                 <p className="text-gray-200 text-xs mt-auto">Learn more about our vision.</p>
              </div>
           </div>
 
+
+
+
+
+
+
+
+
           {/* COLUMN 3: ABOUT US (About Page) */}
-          <div 
-             onClick={() => handleNav("about")}
-             className="w-[65vw] md:w-[18vw] flex-shrink-0 bg-[#808080] h-full rounded-3xl p-6 flex flex-col justify-between hover:bg-black transition-colors cursor-pointer border border-white/10 menu-card group"
-          >
+         <div 
+            onClick={() => handleNav("about")} 
+          className="w-[65vw] md:w-[18vw] flex-shrink-0 bg-[#808080] min-h-[400px] max-h-[500px] rounded-3xl p-6 flex flex-col justify-between hover:bg-black transition-colors cursor-pointer border border-white/10 menu-card group"
+>
+
              <h3 className="text-2xl font-bold text-black group-hover:text-white transition-colors">About us &rarr;</h3>
              
              <div className="self-center scale-110 text-white">
@@ -118,11 +139,20 @@ export default function FloatingMenu({ setActivePage }: { setActivePage: (page: 
              </div>
           </div>
 
+
+
+
+
+
+
+
            {/* COLUMN 4: PITCH US (Pitch Page) */}
-           <div 
-             onClick={() => handleNav("pitch")} 
-             className="w-[65vw] md:w-[18vw] flex-shrink-0 bg-[#808080] h-full rounded-3xl p-6 flex flex-col justify-between hover:bg-black transition-colors cursor-pointer border border-white/10 menu-card group"
-           >
+         
+            <div 
+                onClick={() => handleNav("pitch")} 
+             className="w-[65vw] md:w-[18vw] flex-shrink-0 bg-[#808080] min-h-[400px] max-h-[500px] rounded-3xl p-6 flex flex-col justify-between hover:bg-black transition-colors cursor-pointer border border-white/10 menu-card group"
+>
+
              <h3 className="text-2xl font-bold text-black group-hover:text-white transition-colors">Pitch us &rarr;</h3>
              <div className="self-center scale-110 text-white">
                  <LotusIcon />
@@ -133,6 +163,15 @@ export default function FloatingMenu({ setActivePage }: { setActivePage: (page: 
                 </p>
              </div>
           </div>
+
+
+
+
+
+
+
+
+
 
           {/* COLUMN 5: SOCIAL STACK */}
           <div className="w-[65vw] md:w-[14vw] flex-shrink-0 h-full flex flex-col gap-2 menu-card">

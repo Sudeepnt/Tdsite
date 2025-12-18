@@ -4,7 +4,9 @@ import React from "react";
 
 export default function CuratedPartnerships() {
   return (
-    <section className="relative z-20 w-full bg-transparent border border-black box-border m-4">
+    // FIX: Removed 'w-full'. 
+    // Now 'm-4' creates space on ALL sides (Left, Top, Right, Bottom) without pushing the right border off-screen.
+    <section className="relative z-20 m-4 bg-transparent border border-black box-border">
       
       <div className="relative w-full h-[40vh] flex flex-col justify-end overflow-hidden group cursor-pointer transition-colors duration-500">
         
