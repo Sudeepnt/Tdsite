@@ -2,7 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import BloatedKepler from "../Bloated/BloatedA"; // Using your specified path
+import BottomBox from "./BottomBox";
+ 
 
 export default function About() {
   const socialLinks = [
@@ -25,8 +26,8 @@ export default function About() {
 
   return (
     // MAIN CONTAINER: Black Background, White Text
-      <div className="relative w-full bg-black text-white min-h-screen pt-12 z-40 font-sans selection:bg-white selection:text-black">
-      {/* LEFT: Logo */}
+      <div className="relative w-full bg-black text-white min-h-screen pt-24 z-40 font-sans selection:bg-white selection:text-black">
+
       <div className="w-full md:w-1/3 mb-12 md:mb-0 sticky top-12 px-6 md:px-16">
           <Image 
             src="/crodallogoabout.png" 
@@ -156,26 +157,11 @@ export default function About() {
             </a>
           </section>
 
+ 
+<div className="h-[10vh] md:h-[15vh]"></div>
+<BottomBox isDark={true} /> 
 
-      {/* --- FOOTER --- */}
-      <footer className="w-full text-white py-16 px-6 md:px-16 border-t border-white/10">
-         <div className="flex flex-col md:flex-row justify-end items-start md:items-end gap-12">
-            
-            {/* Right: Link Columns */}
-            <div className="flex gap-8 md:gap-16 text-right">
-                {socialLinks.map((section, i) => (
-                    <div key={i} className="flex flex-col gap-2">
-                        {section.col.map((link, j) => (
-                            <a key={j} href="#" className="hover:underline opacity-90 text-sm font-bold whitespace-nowrap">
-                                {link}
-                            </a>
-                        ))}
-                    </div>
-                ))}
-            </div>
-         </div>
-      </footer>
- <div className="h-[30vh] md:h-[35vh]"></div>
+
     </div>
   );
 }

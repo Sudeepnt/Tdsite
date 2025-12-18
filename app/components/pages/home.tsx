@@ -1,64 +1,84 @@
 "use client";
 
-import React from "react";
-// REMOVE SCENE IMPORT - It is handled in page.tsx
+import React, { useState } from "react";
 import ProjectStack from "./ProjectStack"; 
-// import PortfolioBanner from "./PortfolioBanner"; 
 import CuratedPartnerships from "./CuratedPartnerships"; 
-import Footer from "./Footer"; 
+import Header from "../Header";
+import BottomBox from "./BottomBox";
+import About from "../pages/about"; // Import your About component
+import Pitch from "../pages/pitch"; // Import your Pitch component
+
+
+ 
+
+const DotColumn = ({ className = "" }: { className?: string }) => {
+  return (
+    <div className={`h-full flex flex-col justify-between items-center ${className}`}>
+      {Array.from({ length: 9 }).map((_, i) => (
+        <div key={i} className="w-1 h-1 bg-[#0a0a0ab3]" />
+      ))}
+    </div>
+  );
+};
 
 export default function Home() {
+  const [view, setView] = useState<"home" | "about" | "pitch">("home");
+
   return (
     <div id="home-container" className="relative w-full min-h-screen">
       
-      {/* 
-        --- GLOBAL BACKGROUND PATTERN --- 
-        Moved here so it covers the entire "home-container" (Hero + Projects + Footer).
-        1. Changed to 'absolute inset-0 h-full'.
-        2. Removed 'maskImage' so dots don't fade out.
-        3. Added 'z-0' so it sits behind content.
-      */}
-      <div 
-          className="absolute inset-0 w-full h-full opacity-30 pointer-events-none z-0"
-          style={{
-              backgroundImage: `radial-gradient(#3035e6 1.5px, transparent 1.5px)`,
-              backgroundSize: '40px 40px',
-              // REMOVED maskImage here so the dots persist to the very bottom
-          }}
-      />
+      {/* 1. ADAPTIVE HEADER */}
+      <Header onNavigate={(target) => setView(target)} currentView={view} />
 
-      {/* --- HERO SECTION --- */}
-      {/* Added 'relative z-10' to ensure text sits ABOVE the dots */}
-      <section className="h-screen w-full flex flex-col justify-end p-8 md:p-12 relative z-10 overflow-hidden pointer-events-none">
-        
-       <div className="relative w-full flex justify-end items-end">
-          <div className="max-w-xl md:max-w-md text-right">
-            <h1 className="text-lg md:text-xl font-medium leading-relaxed text-gray-600 tracking-wide">
-              Crodal is a Software design and development company headquartered in Banglore.
-              Crodal curates its partnership with founders worldwide to showcase some of the
-              best and brilliant products in Artificial Intelligence.
-            </h1>
-          </div>
+      {/* 2. BACKGROUND GRID (Home only) */}
+      {view === "home" && (
+        <div className="fixed inset-0 z-0 pointer-events-none w-full h-full select-none">
+          <div className="absolute left-0 top-0 h-full"><DotColumn /></div>
+          <div className="hidden md:block absolute left-[12.5%] top-0 h-full -translate-x-1/2"><DotColumn /></div>
+          <div className="hidden md:block absolute left-1/4 top-0 h-full -translate-x-1/2"><DotColumn /></div>
+          <div className="hidden md:block absolute left-[37.5%] top-0 h-full -translate-x-1/2"><DotColumn /></div>
+          <div className="absolute left-1/2 top-0 h-full -translate-x-1/2"><DotColumn /></div>
+          <div className="hidden md:block absolute left-[62.5%] top-0 h-full -translate-x-1/2"><DotColumn /></div>
+          <div className="hidden md:block absolute left-3/4 top-0 h-full -translate-x-1/2"><DotColumn /></div>
+          <div className="hidden md:block absolute left-[87.5%] top-0 h-full -translate-x-1/2"><DotColumn /></div>
+          <div className="absolute right-0 top-0 h-full"><DotColumn /></div>
         </div>
-      </section>
+      )}
 
-      {/* --- CONTENT WRAPPER --- */}
-      {/* Added 'relative z-10' here as well so these components sit ABOVE the dots */}
-      <div className="w-full relative z-10">
+      {/* 3. CONTENT AREA */}
+      <div className="relative z-10">
         
-        {/* 
-           IMPORTANT: Ensure ProjectStack, CuratedPartnerships, and Footer 
-           have a transparent background (no 'bg-white' or 'bg-black'), 
-           otherwise they will cover the dots.
-        */}
-        <ProjectStack />
-        {/* <PortfolioBanner /> */}
-        <CuratedPartnerships />
-        <Footer />
-        
+        {/* HOME */}
+        {view === "home" && (
+          <>
+            <section className="h-screen w-full flex flex-col justify-end p-8 md:p-12 pointer-events-none">
+              <div className="relative w-full flex justify-end items-end">
+                <div className="max-w-xl md:max-w-md text-right">
+                  <h1 className="text-lg md:text-xl font-medium leading-relaxed text-gray-600 tracking-wide">
+                    Crodal is a Software design and development company headquartered in Banglore.
+                    Crodal curates its partnership with founders worldwide to showcase some of the
+                    best and brilliant products in Artificial Intelligence.
+                  </h1>
+                </div>
+              </div>
+            </section>
+            <div className="w-full">
+              <ProjectStack />
+              <div className="h-[10vh] md:h-[15vh]"></div>
+              <CuratedPartnerships />
+              <div className="h-[10vh] md:h-[15vh]"></div>
+              <BottomBox />
+            </div>
+          </>
+        )}
+
+        {/* ABOUT (Dark Mode) */}
+        {view === "about" && <About />}
+
+        {/* PITCH (Light Grey Mode) */}
+        {view === "pitch" && <Pitch />}
+
       </div>
-      
-      <div className="h-[30vh] md:h-[35vh]"></div>
     </div>
   );
 }
