@@ -158,7 +158,7 @@ export default function About() {
           </section>
 
  
-<div className="h-[10vh] md:h-[15vh]"></div>
+ 
 <BottomBox isDark={true} /> 
 
 

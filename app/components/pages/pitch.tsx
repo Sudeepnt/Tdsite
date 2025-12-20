@@ -89,7 +89,7 @@ export default function Pitch() {
 
       {/* 2. FULL WIDTH FOOTER SECTION */}
       {/* Moved outside the flex-center div so it takes 100% width */}
-      <div className="w-full mt-20">
+      <div className="w-full">
         <BottomBox isDark={false} />  
       </div>
 

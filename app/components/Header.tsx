@@ -31,11 +31,12 @@ export default function Header({ onNavigate, currentView }: HeaderProps) {
             onClick={item.action}
             className={`
               relative h-14 p-2
-              flex items-start justify-start
-              bg-transparent             /* No background as requested */
+              flex items-start justify-start  /* Aligns text to top-left corner */
+              bg-transparent
               border font-bold text-sm uppercase tracking-wide
               transition-all duration-300
-              ${themeClasses}           /* Context-aware colors */
+              rounded-sm                      /* Small rounding (approx 6px) */
+              ${themeClasses}
             `}
           >
             {item.label}
