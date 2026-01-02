@@ -45,7 +45,7 @@ export default function Pitch() {
   };
 
   return (
-    <div className="relative w-full min-h-screen bg-[#F0F0F0] text-[#1a1a1a] font-sans pt-22 z-40 selection:bg-black selection:text-white overflow-x-hidden">
+    <div className="relative w-full min-h-screen bg-[#FFFFFF] text-[#1a1a1a] font-sans pt-22 z-40 selection:bg-black selection:text-white overflow-x-hidden">
       
       <div className="w-full px-6 md:px-16 flex flex-col items-center">
         
