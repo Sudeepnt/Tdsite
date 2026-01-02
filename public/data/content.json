@@ -1,0 +1,120 @@
+{
+  "home": {
+    "heroText": "Crodal is a Software design and development company headquartered in Bangalore.",
+    "header": {
+      "navItems": [
+        {
+          "label": "Crodal"
+        },
+        {
+          "label": "Projects"
+        },
+        {
+          "label": "About"
+        },
+        {
+          "label": "Pitch Us"
+        }
+      ]
+    },
+    "curatedPartnerships": {
+      "description": "Crodal curates its partnerships with developers worldwide to showcase some of the newest and most brilliant ideas in gaming that combine experimental game design with unique art direction.",
+      "linkText": "Learn more here →",
+      "linkUrl": "#"
+    },
+    "projectStack": {
+      "projects": [
+        {
+          "sub": "Job Worker Inventory"
+        },
+        {
+          "sub": "Gattabara Game Studios"
+        },
+        {
+          "sub": "Vitta Chitta"
+        },
+        {
+          "sub": "A44 Games"
+        },
+        {
+          "sub": "The Gentlebros"
+        },
+        {
+          "sub": "Hadoque"
+        },
+        {
+          "sub": "Project 7"
+        },
+        {
+          "sub": "Project 8"
+        }
+      ]
+    },
+    "bottomBox": {
+      "phrases": [
+        "crodal.",
+        "crafted with conviction.",
+        "inspired by culture."
+      ],
+      "contactEmail": "contact@crodal.com",
+      "footerLinks": [
+        {
+          "label": "Careers",
+          "url": "#"
+        },
+        {
+          "label": "Pitch",
+          "url": "#"
+        },
+        {
+          "label": "Twitter",
+          "url": "https://twitter.com"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://linkedin.com"
+        },
+        {
+          "label": "Newsletter",
+          "url": "#"
+        }
+      ]
+    }
+  },
+  "about": {
+    "introText": [
+      "We are an AI-native software company that builds intelligent products alongside founders. Crodal partners through a co-creation model—working closely with leadership teams, sharing ownership, and shaping strategy—while preserving creative and technical independence. Together, we design, build, and scale AI-driven software that is both impactful and commercially successful.",
+      "We spent a lot of time thinking about what our values as a company are. They inform every decision we make and we wanted to ensure we got them right. We're always changing but these ideas are foundational to who we are."
+    ],
+    "values": [
+      {
+        "title": "Curiosity, creativity and intellectual agility",
+        "description": "Original thinking and collaboration are at the core of the organization. Strong voices and unique ideas are valued in everything we do.",
+        "image": "/About1.png"
+      },
+      {
+        "title": "Savoir Faire",
+        "description": "We celebrate people who take pride in their craft, giving them the space to improve, the resources to flourish, and opportunities to share their expertise.",
+        "image": "/About3.png"
+      },
+      {
+        "title": "Supporting and elevating each other",
+        "description": "We nurture a vibrant, inclusive community where people feel safe, respected and empowered.",
+        "image": "/About2.png"
+      }
+    ],
+    "careersLink": "If any of this sounds like something you'd like to be a part of, we'd love to hear from you! Check out our vacancies over on our careers portal →"
+  },
+  "pitch": {
+    "title": "Inbound Form.",
+    "introText": "We understand that pitching can be challenging. Please read through this page in full before progressing to help make your submission the best it can be.",
+    "tips": [
+      "Values: \"Hands Off.\" We want to understand how you will manage everything from development to release.",
+      "Confidence: Tell us what you want to make and what sets it apart.",
+      "Conciseness: Keep the deck short. Attach deep-dives as separate docs.",
+      "Priorities: Demo > Video > Concept Art."
+    ],
+    "noteText": "Note: Crodal and Kowloon specialise in funding premium PC and Console projects. No blockchain/NFTs.",
+    "buttonText": "Start Application"
+  }
+}

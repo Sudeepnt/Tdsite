@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 interface HeaderProps {
   onNavigate: (view: "home" | "about" | "pitch") => void;
@@ -8,19 +8,32 @@ interface HeaderProps {
 }
 
 export default function Header({ onNavigate, currentView }: HeaderProps) {
-  // Logic: About page is dark (needs white), Home & Pitch are light (need black)
-  const isWhiteTheme = currentView === "about";
+  const [navItems, setNavItems] = useState<Array<{ label: string; action: () => void }>>([]);
 
+  useEffect(() => {
+    fetch('/data/content.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data?.home?.header?.navItems) {
+          const loadedItems = data.home.header.navItems.map((item: any, index: number) => {
+            if (index === 0 || index === 1) {
+              return { label: item.label, action: () => window.location.reload() };
+            } else if (index === 2) {
+              return { label: item.label, action: () => onNavigate("about") };
+            } else {
+              return { label: item.label, action: () => onNavigate("pitch") };
+            }
+          });
+          setNavItems(loadedItems);
+        }
+      })
+      .catch(error => console.error('Header load error:', error));
+  }, [onNavigate]);
+
+  const isWhiteTheme = currentView === "about";
   const themeClasses = isWhiteTheme
     ? "border-white text-white hover:bg-white hover:text-black"
     : "border-black text-black hover:bg-black hover:text-white";
-
-  const navItems = [
-    { label: "Crodal", action: () => window.location.reload() },
-    { label: "Projects", action: () => window.location.reload() },
-    { label: "Explore", action: () => onNavigate("about") },
-    { label: "Pitch Us", action: () => onNavigate("pitch") },
-  ];
 
   return (
     <header className="fixed top-0 left-0 w-full z-[100] p-4 md:p-1">

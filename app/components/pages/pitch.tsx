@@ -1,94 +1,177 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import BottomBox from "./BottomBox";
 
 export default function Pitch() {
-  const socialLinks = ["Twitter", "Blue sky", "Instagram", "LinkedIn", "Youtube", "Newsletter"];
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [dragActive, setDragActive] = useState(false);
+  
+  const [title, setTitle] = useState("Inbound Form.");
+  const [introText, setIntroText] = useState("");
+  const [tips, setTips] = useState<string[]>([]);
+  const [noteText, setNoteText] = useState("");
+  const [buttonText, setButtonText] = useState("Start Application");
+
+  useEffect(() => {
+    fetch('/data/content.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data?.pitch) {
+          if (data.pitch.title) setTitle(data.pitch.title);
+          if (data.pitch.introText) setIntroText(data.pitch.introText);
+          if (data.pitch.tips) setTips(data.pitch.tips);
+          if (data.pitch.noteText) setNoteText(data.pitch.noteText);
+          if (data.pitch.buttonText) setButtonText(data.pitch.buttonText);
+        }
+      })
+      .catch(error => console.error('Pitch page load error:', error));
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Pitch submitted! (This is a demo action)");
+  };
+
+  const handleDrag = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
+  };
 
   return (
-    <div className="relative w-full min-h-screen bg-[#F0F0F0] text-[#1a1a1a] font-sans pt-22 z-40 selection:bg-[#3035e6] selection:text-white overflow-x-hidden">
+    <div className="relative w-full min-h-screen bg-[#F0F0F0] text-[#1a1a1a] font-sans pt-22 z-40 selection:bg-black selection:text-white overflow-x-hidden">
       
-      {/* 1. CENTERED CONTENT SECTION */}
       <div className="w-full px-6 md:px-16 flex flex-col items-center">
         
-        {/* Logo - Centered above the text */}
         <div className="mb-12 flex justify-start w-full">
-            <Image 
-              src="/crodallogoabout.png"
-              alt="Crodal Logo"
-              width={120}
-              height={48}
-              className="object-contain"
-            />
+          <Image 
+            src="/crodallogoabout.png"
+            alt="Crodal Logo"
+            width={120}
+            height={48}
+            className="object-contain"
+          />
         </div>
 
-        {/* Text Wrapper - Constrained for readability but centered on page */}
         <div className="w-full max-w-2xl flex flex-col items-start pb-24">
             
-            {/* Title - Cobalt Blue */}
-            <h1 className="text-3xl md:text-5xl font-bold text-[#3035e6] mb-12 tracking-tight leading-none">
-                Inbound Form
-            </h1>
+          <h1 className="text-4xl md:text-6xl font-bold text-black mb-12 tracking-tighter leading-none">
+            {title}
+          </h1>
 
-            {/* Intro Text */}
-            <div className="space-y-8 text-lg md:text-[1.15rem] leading-[1.5] font-semibold text-[#222]">
-                <p>
-                    We understand that pitching can be challenging, so we've got some useful tips below. 
-                    Please read through this page in full before progressing to help make your submission the best it can be.
-                </p>
+          <div className="space-y-8 text-lg md:text-[1.15rem] leading-[1.6] font-medium text-[#222]">
+            <p>{introText}</p>
 
-                {/* Bullets */}
-                <ul className="space-y-4">
-                    <li className="flex gap-4 items-start">
-                        <span className="mt-[0.6em] min-w-[6px] h-[6px] bg-[#222] block flex-shrink-0"></span>
-                        <span>
-                            <span className="font-bold text-black">One of our core values is “Hands Off.”</span> This means we want to understand how you will manage everything from development to the successful release of your project.
-                        </span>
-                    </li>
-                    <li className="flex gap-4 items-start">
-                        <span className="mt-[0.6em] min-w-[6px] h-[6px] bg-[#222] block flex-shrink-0"></span>
-                        <span>
-                            <span className="font-bold text-black">Be confident and passionate about your project.</span> Tell us what you want to make and what sets it apart.
-                        </span>
-                    </li>
-                    <li className="flex gap-4 items-start">
-                        <span className="mt-[0.6em] min-w-[6px] h-[6px] bg-[#222] block flex-shrink-0"></span>
-                        <span>
-                            <span className="font-bold text-black">Be concise with your pitch deck.</span> If you want to go deep on game systems, attach that as a separate document.
-                        </span>
-                    </li>
-                    <li className="flex gap-4 items-start">
-                        <span className="mt-[0.6em] min-w-[6px] h-[6px] bg-[#222] block flex-shrink-0"></span>
-                        <span>
-                            <span className="font-bold text-black">Demo {'>'} Video {'>'} Concept Art:</span> we prioritize projects that have something playable or a proof of concept to show.
-                        </span>
-                    </li>
-                </ul>
+            <ul className="space-y-5">
+              {tips.map((tip, index) => (
+                <li key={index} className="flex gap-4 items-start group">
+                  <span className="mt-[0.6em] w-2 h-2 rounded-full bg-black group-hover:scale-150 transition-transform duration-300 flex-shrink-0"></span>
+                  <span>{tip}</span>
+                </li>
+              ))}
+            </ul>
 
-                <p>
-                    The form below will include all the information that we require to assess your title. Please read through before submitting.
-                </p>
+            <p className="italic font-bold text-black opacity-80 border-l-4 border-black pl-6 py-2 bg-black/5 rounded-r-lg">
+              {noteText}
+            </p>
+          </div>
 
-                <p className="italic font-bold text-[#333] opacity-90 border-l-4 border-[#3035e6] pl-4 py-2">
-                    Note: Crodal and Kowloon specialise in funding premium PC and Console projects. We do not support content tied to blockchain or NFTs.
-                </p>
-            </div>
+          <div className="mt-16 w-full">
+            <button 
+              onClick={() => setIsFormOpen(!isFormOpen)}
+              className={`w-full bg-black hover:bg-[#222] text-white text-left pl-8 py-6 rounded-2xl font-bold text-xl transition-all duration-500 shadow-xl hover:shadow-2xl hover:-translate-y-1 group flex justify-between items-center pr-8 ${isFormOpen ? 'mb-8' : ''}`}
+            >
+              <span className="tracking-wide">{isFormOpen ? "Close Application" : buttonText}</span>
+              <div className={`w-10 h-10 rounded-full bg-white text-black flex items-center justify-center transition-transform duration-500 ${isFormOpen ? 'rotate-180' : 'group-hover:rotate-90'}`}>
+                &darr;
+              </div>
+            </button>
+          </div>
 
-            {/* Button */}
-            <div className="mt-16 w-full">
-                <button className="w-full bg-[#3035e6] hover:bg-black text-white text-left pl-6 py-6 rounded-[2px] font-bold text-xl transition-all duration-500 group flex justify-between items-center pr-6">
-                    Click here to start
-                    <span className="group-hover:translate-x-2 transition-transform">&rarr;</span>
+          {isFormOpen && (
+            <div className="w-full animate-in slide-in-from-bottom-4 fade-in duration-700 ease-out">
+              <form onSubmit={handleSubmit} className="bg-white p-8 md:p-10 border border-[#e5e5e5] shadow-2xl rounded-3xl flex flex-col gap-8 relative overflow-hidden">
+                
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gray-100 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2 opacity-50"></div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="flex flex-col gap-3 group">
+                    <label className="font-bold text-xs uppercase tracking-widest text-[#888] group-hover:text-black transition-colors ml-1">Contact Name</label>
+                    <input 
+                      type="text" 
+                      required 
+                      placeholder="JOHN DOE"
+                      className="w-full bg-transparent border border-[#ccc] focus:border-black rounded-xl p-4 outline-none transition-all duration-300 placeholder:text-gray-300 font-bold text-black hover:border-gray-400 focus:shadow-lg"
+                    />
+                  </div>
+                  
+                  <div className="flex flex-col gap-3 group">
+                    <label className="font-bold text-xs uppercase tracking-widest text-[#888] group-hover:text-black transition-colors ml-1">Email Address</label>
+                    <input 
+                      type="email" 
+                      required 
+                      placeholder="JOHN@STUDIO.COM"
+                      className="w-full bg-transparent border border-[#ccc] focus:border-black rounded-xl p-4 outline-none transition-all duration-300 placeholder:text-gray-300 font-bold text-black hover:border-gray-400 focus:shadow-lg"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3 group">
+                  <label className="font-bold text-xs uppercase tracking-widest text-[#888] group-hover:text-black transition-colors ml-1">The Project</label>
+                  <textarea 
+                    rows={5}
+                    required 
+                    placeholder="TELL US WHAT YOU ARE BUILDING..."
+                    className="w-full bg-transparent border border-[#ccc] focus:border-black rounded-xl p-4 outline-none transition-all duration-300 placeholder:text-gray-300 font-medium text-black resize-none hover:border-gray-400 focus:shadow-lg"
+                  ></textarea>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <label className="font-bold text-xs uppercase tracking-widest text-[#888] ml-1">Materials</label>
+                  <div 
+                    onDragEnter={handleDrag}
+                    onDragLeave={handleDrag}
+                    onDragOver={handleDrag}
+                    onDrop={handleDrag}
+                    className={`relative w-full h-40 border-2 border-dashed rounded-xl transition-all duration-300 flex flex-col items-center justify-center text-center cursor-pointer group overflow-hidden
+                      ${dragActive ? 'border-black bg-gray-50' : 'border-[#ccc] bg-transparent hover:border-gray-400'}`}
+                  >
+                    <input 
+                      type="file" 
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
+                      multiple
+                    />
+                    
+                    <div className="z-0 flex flex-col items-center gap-2 transform group-hover:scale-105 transition-transform duration-300">
+                      <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center text-2xl mb-1">
+                        +
+                      </div>
+                      <span className="font-bold text-black">UPLOAD PITCH DECK</span>
+                      <span className="text-xs text-gray-400 uppercase tracking-wide">PDF, PPTX, ZIP (Max 50MB)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <button 
+                  type="submit"
+                  className="mt-6 w-full bg-black text-white font-black text-md py-5 rounded-xl hover:bg-[#222] hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 uppercase tracking-widest shadow-xl"
+                >
+                  Submit Pitch
                 </button>
+
+              </form>
             </div>
+          )}
         
         </div>
       </div>
 
-      {/* 2. FULL WIDTH FOOTER SECTION */}
-      {/* Moved outside the flex-center div so it takes 100% width */}
       <div className="w-full">
         <BottomBox isDark={false} />  
       </div>
